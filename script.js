@@ -1,24 +1,34 @@
-document.getElementById("chat-form").addEventListener("submit", async function (e) {
+const chatbox = document.getElementById("chatbox");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const input = document.getElementById("user-input");
-  const chatbox = document.getElementById("chatbox");
-  const userText = input.value;
-  chatbox.innerHTML += `<div><strong>Tú:</strong> ${userText}</div>`;
+  const userMessage = input.value.trim();
+  if (!userMessage) return;
+
+  appendMessage("🧑 Tú", userMessage);
   input.value = "";
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer TU_API_KEY_AQUI"
-    },
-    body: JSON.stringify({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: userText }]
-    })
-  });
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message: userMessage })
+    });
 
-  const data = await response.json();
-  const reply = data.choices?.[0]?.message?.content || "Error al obtener respuesta.";
-  chatbox.innerHTML += `<div><strong>KronGPT:</strong> ${reply}</div>`;
+    const data = await response.json();
+    appendMessage("🤖 KronGPT", data.reply);
+  } catch (error) {
+    appendMessage("⚠️ Error", "No se pudo conectar con KronGPT.");
+  }
 });
+
+function appendMessage(sender, message) {
+  const msg = document.createElement("div");
+  msg.innerHTML = `<strong>${sender}:</strong> ${message}`;
+  chatbox.appendChild(msg);
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
