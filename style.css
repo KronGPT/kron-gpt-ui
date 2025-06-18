@@ -1,0 +1,43 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0e101c;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+  background: #1c1f3a;
+  border-radius: 8px;
+}
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+#chatbox {
+  min-height: 200px;
+  border: 1px solid #444;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow-y: auto;
+  background: #2e314d;
+}
+form {
+  display: flex;
+}
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+}
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}

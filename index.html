@@ -1,53 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KronGPT - Asistente de Inversiones en IA</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #1a1a1a, #0a0a23);
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        text-align: center;
-      }
-
-      .container {
-        padding: 2rem;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        color: #00ffd5;
-        margin-bottom: 1rem;
-      }
-
-      p {
-        font-size: 1.1rem;
-        color: #cccccc;
-      }
-
-      .tagline {
-        margin-top: 2rem;
-        font-style: italic;
-        color: #aaaaaa;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Hola, soy KronGPT</h1>
-      <p>Tu asistente de inversiones en IA.</p>
-      <p class="tagline">Potencia tus decisiones con inteligencia artificial.</p>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KronGPT - Asistente de Inversiones</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>💼 Hola, soy <strong>KronGPT</strong>, tu asistente de inversiones en IA.</h1>
+    <div id="chatbox"></div>
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Escribe tu pregunta..." required />
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
 </html>
