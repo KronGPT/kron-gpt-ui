@@ -1,34 +1,20 @@
-const chatbox = document.getElementById("chatbox");
-const form = document.getElementById("form");
-const input = document.getElementById("input");
-
-form.addEventListener("submit", async (e) => {
+document.getElementById("chat-form").addEventListener("submit", async function (e) {
   e.preventDefault();
-  const userMessage = input.value.trim();
-  if (!userMessage) return;
 
-  appendMessage("🧑 Tú", userMessage);
-  input.value = "";
+  const userInput = document.getElementById("user-input").value;
+  const chatBox = document.getElementById("chatbox");
 
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ message: userMessage })
-    });
+  chatBox.innerHTML += `<p><strong>Tú:</strong> ${userInput}</p>`;
+  document.getElementById("user-input").value = "";
 
-    const data = await response.json();
-    appendMessage("🤖 KronGPT", data.reply);
-  } catch (error) {
-    appendMessage("⚠️ Error", "No se pudo conectar con KronGPT.");
-  }
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: userInput })
+  });
+
+  const data = await response.json();
+  chatBox.innerHTML += `<p><strong>KronGPT:</strong> ${data.reply}</p>`;
 });
-
-function appendMessage(sender, message) {
-  const msg = document.createElement("div");
-  msg.innerHTML = `<strong>${sender}:</strong> ${message}`;
-  chatbox.appendChild(msg);
-  chatbox.scrollTop = chatbox.scrollHeight;
-}
