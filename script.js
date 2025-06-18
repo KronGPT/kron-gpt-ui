@@ -1,21 +1,21 @@
-document.getElementById("chat-form").addEventListener("submit", async function (e) {
+document.getElementById("chat-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const userInput = document.getElementById("user-input").value;
+  const input = document.getElementById("user-input");
+  const message = input.value;
+  if (!message) return;
+
   const chatbox = document.getElementById("chatbox");
+  chatbox.innerHTML += `<p><strong>Tú:</strong> ${message}</p>`;
+  input.value = "";
 
-  // Muestra la pregunta
-  chatbox.innerHTML += `<p><strong>Tú:</strong> ${userInput}</p>`;
-
-  // Llama a la API
   const response = await fetch("/api/chat", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt: userInput }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ prompt: message }),
   });
 
   const data = await response.json();
-
-  // Muestra la respuesta
   chatbox.innerHTML += `<p><strong>KronGPT:</strong> ${data.result}</p>`;
-  document.getElementById("user-input").value = "";
 });
