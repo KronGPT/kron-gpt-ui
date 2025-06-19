@@ -8,10 +8,10 @@ document.getElementById("chat-form").addEventListener("submit", async (e) => {
   chatbox.innerHTML += `<p><strong>Tú:</strong> ${message}</p>`;
   input.value = "";
 
-  const response = await fetch("api/chat", {
+  const response = await fetch("/api/chat", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({ prompt: message }),
   });
